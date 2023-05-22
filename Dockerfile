@@ -15,6 +15,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
   libicu-dev \
   libsodium-dev \
   libssl-dev \
+  libcairo2-dev \
   make \
   zlib1g-dev && \
   wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VER:-1.3.353}/quarto-${QUARTO_VER:-1.3.353}-linux-amd64.deb && \

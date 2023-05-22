@@ -31,7 +31,17 @@
 			"requireLocalPort": true,
 			"onAutoForward": "ignore"
 		}
-	}
+	},
+	"dev.containers.defaultExtensions": [
+	    // for better git
+        "eamodio.gitlens",
+        // so we can see how many resources we are consuming
+        "mutantdino.resourcemonitor",
+        // for working with R files
+        "REditorSupport.r"
+        // for quarto
+        "quarto.quarto"
+    ]
 	//,
 	// Use 'postAttachCommand' to run commands after the container is started.
 	// "postAttachCommand": "sudo rstudio-server start"

@@ -5,7 +5,7 @@ FROM ${BASE_IMAGE}:${R_VER}
 ARG BASE_IMAGE
 ARG R_VER
 
-ARG IMAGE_NAME=wrokshop
+ARG IMAGE_NAME=workshop
 LABEL Name=${IMAGE_NAME} Version=${R_VER}
 
 ENV RENV_CONFIG_REPOS_OVERRIDE https://packagemanager.rstudio.com/cran/latest
@@ -16,7 +16,10 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
   libsodium-dev \
   libssl-dev \
   make \
-  zlib1g-dev
+  zlib1g-dev && \
+  wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VER:-1.3.353}/quarto-${QUARTO_VER:-1.3.353}-linux-amd64.deb && \
+  dpkg -i quarto-${QUARTO_VER:-1.3.353}-linux-amd64.deb &&
+  rm quarto-${QUARTO_VER:-1.3.353}-linux-amd64.deb
 
 # this uses a predescribed set of packages to be baked into this image
 # this will install all the packages from the project into the root of the docker image

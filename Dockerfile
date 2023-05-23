@@ -20,7 +20,8 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
   zlib1g-dev && \
   wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VER:-1.3.353}/quarto-${QUARTO_VER:-1.3.353}-linux-amd64.deb && \
   dpkg -i quarto-${QUARTO_VER:-1.3.353}-linux-amd64.deb && \
-  rm quarto-${QUARTO_VER:-1.3.353}-linux-amd64.deb
+  rm quarto-${QUARTO_VER:-1.3.353}-linux-amd64.deb && \
+  wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
 
 # this uses a predescribed set of packages to be baked into this image
 # this will install all the packages from the project into the root of the docker image

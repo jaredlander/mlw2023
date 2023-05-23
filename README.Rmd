@@ -7,7 +7,7 @@ params:
   workshop_url: https://www.predictiveanalyticsworld.com/machinelearningweek/workshops/machine-learning-with-r/
   organizer_name: Machine Learning Week 2023
   organizer_url: https://www.predictiveanalyticsworld.com/machinelearningweek/
-  image_name: r_ml_workshop
+  image_name: mlw2023
   image_tag: 4.3.0
   github_username: jaredlander
   github_slug: mlw2023
@@ -69,7 +69,7 @@ docker pull `r glue::glue("jaredlander/{params$image_name}:{params$image_tag}")`
 You can run the container with the following command which will also mount a folder as a volume for you to use.
 
 ```sh
-docker run -it --rm --name rstudio_ml -e PASSWORD=password -e ROOT=true -p 8787:8787 -v $PWD/workshop:/home/rstudio/workshop  `r glue::glue("jaredlander/{params$image_name}:{params$image_tag}")`
+docker run -it --rm --name rstudio_ml -e PASSWORD=password -e ROOT=true -p 8787:8787 -v $PWD/workshop:/home/rstudio/workshop `r glue::glue("jaredlander/{params$image_name}:{params$image_tag}")`
 ```
 
 ```{sh docker-run,eval=FALSE,echo=FALSE,include=FALSE}

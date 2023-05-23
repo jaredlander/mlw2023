@@ -56,13 +56,13 @@ This includes the [renv](https://rstudio.github.io/renv/) lock file, so you can 
 If you are having trouble installing R or the packages, but are comfortable with Docker, you can pull the Docker image using the following command in your terminal.
 
 ``` sh
-docker pull jaredlander/r_ml_workshop:4.3.0
+docker pull jaredlander/mlw2023:4.3.0
 ```
 
 You can run the container with the following command which will also mount a folder as a volume for you to use.
 
 ``` sh
-docker run -it --rm --name rstudio_ml -e PASSWORD=password -e ROOT=true -p 8787:8787 -v $PWD/workshop:/home/rstudio/workshop  jaredlander/r_ml_workshop:4.3.0
+docker run -it --rm --name rstudio_ml -e PASSWORD=password -e ROOT=true -p 8787:8787 -v $PWD/workshop:/home/rstudio/workshop jaredlander/mlw2023:4.3.0
 ```
 
 Then if you visit port 8787 at the URL for your machine (likely <http://localhost:8787>) then you will have an RStudio interface.

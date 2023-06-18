@@ -143,3 +143,20 @@ flow2
 fit2 <- fit(flow2, data=train)
 
 fit2 |> extract_fit_engine() |> vip::vip()
+
+# Evaluate the Model ####
+
+# regression:
+# - root mean squared error
+# - mean absolute error
+
+# classification
+# - accuracy
+# - log loss
+# - AUC
+
+library(yardstick)
+
+loss_fn <- metric_set(roc_auc, mn_log_loss, accuracy)
+loss_fn <- metric_set(roc_auc)
+loss_fn

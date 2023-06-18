@@ -10,7 +10,7 @@
 		// "docker-compose.yml"
 	],
 	// "dockerfile": "../Dockerfile",
-	"image": "docker.io/jaredlander/r_ml_workshop:4.3.0",
+	"image": "docker.io/jaredlander/mlw2023:4.3.0",
 
 	// The 'service' property is the name of the service for the container that VS Code should
 	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.

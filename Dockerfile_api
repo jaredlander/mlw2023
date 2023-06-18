@@ -1,0 +1,21 @@
+ARG BASE_IMAGE=rocker/r-ver:4.3.0
+
+FROM ${BASE_IMAGE}
+
+RUN apt update -qq && apt install -y --no-install-recommends  \
+    libcurl4-openssl-dev \
+  libicu-dev \
+  libsodium-dev \
+  libssl-dev \
+  make \
+  zlib1g-dev \
+  && apt-get clean
+  
+  RUN Rscript -e "install.packages(c('tidymodels', 'plumber', 'themis'), repos='https://packagemanager.rstudio.com/cran/latest')"
+  
+  COPY scoring/plumber.R plumber.R
+  COPY scoring/small_fit.rds small_fit.rds
+  
+  EXPOSE 8000
+  ENTRYPOINT ["R", "-e", "pr <- plumber::plumb('plumber.R'); pr$run(host='0.0.0.0', port=8000)"]
+  

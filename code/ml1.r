@@ -351,4 +351,6 @@ saveRDS(small_fit, 'scoring/small_fit.rds')
 
 new_customer |> jsonlite::toJSON()
 
-https://rstudio.lander.ai/s/d5de88c86696831d6b7ba/p/2ac0a587/predict?new_data=%5B%7B%22Seniority%22%3A12%2C%22Home%22%3A%22owner%22%2C%22Time%22%3A12%2C%22Marital%22%3A%22married%22%2C%22Records%22%3A%22no%22%2C%22Job%22%3A%22circus%20clown%22%2C%22Expenses%22%3A50%2C%22Income%22%3A200%2C%22Assets%22%3A0%2C%22Debt%22%3A150%2C%22Age%22%3A50%2C%22Amount%22%3A2400%2C%22Price%22%3A3000%7D%5D%20
+# https://rstudio.lander.ai/s/d5de88c86696831d6b7ba/p/2ac0a587/predict?new_data=%5B%7B%22Seniority%22%3A12%2C%22Home%22%3A%22owner%22%2C%22Time%22%3A12%2C%22Marital%22%3A%22married%22%2C%22Records%22%3A%22no%22%2C%22Job%22%3A%22circus%20clown%22%2C%22Expenses%22%3A50%2C%22Income%22%3A200%2C%22Assets%22%3A0%2C%22Debt%22%3A150%2C%22Age%22%3A50%2C%22Amount%22%3A2400%2C%22Price%22%3A3000%7D%5D%20
+
+# Digital Ocean Referral Code: https://m.do.co/c/72a2f8fbbfc9

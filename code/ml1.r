@@ -48,7 +48,7 @@ ggplot(train, aes(x=Age, y=Amount, color=Status))  +
 
 train |> count(Home)
 
-train |> select(Home) |> head(n=15) |> View()
+# train |> select(Home) |> head(n=15) |> View()
 
 train |> 
     head(n=15) |> 
@@ -77,4 +77,40 @@ rec1 <- recipe(Status ~ ., data=credit) |>
         all_nominal_predictors(),
         one_hot=TRUE
     )
+
+rec1
+rec1 |> prep()
+rec1 |> prep() |> bake(new_data=NULL)
+# rec1 |> prep() |> bake(new_data=NULL) |> View()
+
+# Define the Model ####
+
+library(parsnip)
+
+linear_reg()
+linear_reg() |> set_engine('lm')
+linear_reg() |> set_engine('glmnet')
+linear_reg() |> set_engine('stan')
+linear_reg() |> set_engine('keras')
+linear_reg() |> set_engine('spark')
+
+rand_forest()
+rand_forest() |> set_mode('regression')
+rand_forest() |> set_mode('classification')
+rand_forest() |> set_mode('classification') |> 
+    set_engine('spark')
+
+rand_forest(mode='classification') |> set_engine('spark')
+
+
+boost_tree(mode='classification') |> set_engine('xgboost')
+
+
+spec1 <- boost_tree(
+    mode='classification',
+    trees=100,
+    tree_depth=4
+) |> 
+    set_engine('xgboost')
+spec1
 

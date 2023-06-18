@@ -114,3 +114,32 @@ spec1 <- boost_tree(
     set_engine('xgboost')
 spec1
 
+# workflows ####
+
+library(workflows)
+
+workflow(preprocessor=rec1, spec=spec1)
+flow1 <- workflow() |> 
+    add_recipe(rec1) |> 
+    add_model(spec1)
+
+# Fit the Model ####
+
+fit1 <- fit(flow1, data=train)
+fit1
+fit1 |> summary()
+fit1 |> extract_fit_engine() |> vip::vip()
+
+spec2 <- boost_tree(
+    mode='classification',
+    trees=400, 
+    tree_depth=4
+)
+
+flow2 <- flow1 |> 
+    update_model(spec2)
+flow2
+
+fit2 <- fit(flow2, data=train)
+
+fit2 |> extract_fit_engine() |> vip::vip()

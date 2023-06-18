@@ -57,7 +57,7 @@ train |>
 
 library(recipes)
 
-recipe(Status ~ ., data=credit) |> 
+rec1 <- recipe(Status ~ ., data=credit) |> 
     themis::step_downsample(Status, under_ratio=1.2) |> 
     # remove inputs with near zero variance
     step_nzv(all_predictors()) |> 
@@ -69,4 +69,12 @@ recipe(Status ~ ., data=credit) |>
     ) |> 
     step_normalize(all_numeric_predictors()) |> 
     # step_center() |> step_scale()
-    
+    step_other(all_nominal_predictors(), other='misc') |> 
+    step_novel(
+        all_nominal_predictors(), new_level='unseen'
+    ) |> 
+    step_dummy(
+        all_nominal_predictors(),
+        one_hot=TRUE
+    )
+

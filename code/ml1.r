@@ -282,3 +282,73 @@ mod3
 
 fit3 <- mod3 |> fit(data=train)
 fit3
+
+
+preds <- predict(fit3, new_data=test)
+preds
+
+preds3_prob <- predict(fit3, new_data=test, type='prob')
+preds3_prob
+
+combined3 <- test |> 
+    select(Status) |> 
+    bind_cols(preds3_prob)
+combined3
+
+roc_auc(combined3, truth=Status, .pred_bad)
+
+accuracy(
+    test |> 
+        select(Status) |> 
+        bind_cols(preds),
+    Status, .pred_class
+)
+
+last3 <- last_fit(
+    object=mod3,
+    split=data_split
+)
+last3
+last3$.metrics[[1]]
+
+# Fit Model on All Data ####
+
+final_fit <- fit(mod3, data=credit)
+
+fake_customers[1, ]
+
+predict(final_fit, new_data=fake_customers[1, ])
+predict(final_fit, new_data=fake_customers[1, ], type='prob')
+
+
+new_customer <- tibble::tibble(
+    Seniority=12,
+    Home='owner',
+    Time=12,
+    Marital='married',
+    Records='no',
+    Job='circus clown',
+    Expenses=50,
+    Income=200,
+    Assets=0,
+    Debt=150,
+    Age=50,
+    Amount=2400,
+    Price=3000
+)
+predict(final_fit, new_data=new_customer, type='prob')
+
+predict(final_fit, new_data=fake_customers, type='prob')
+?modeldata::credit_data
+
+# Deploy Model ####
+
+library(vetiver)
+
+small_fit <- final_fit |> butcher::butcher()
+
+saveRDS(small_fit, 'scoring/small_fit.rds')
+
+new_customer |> jsonlite::toJSON()
+
+https://rstudio.lander.ai/s/d5de88c86696831d6b7ba/p/2ac0a587/predict?new_data=%5B%7B%22Seniority%22%3A12%2C%22Home%22%3A%22owner%22%2C%22Time%22%3A12%2C%22Marital%22%3A%22married%22%2C%22Records%22%3A%22no%22%2C%22Job%22%3A%22circus%20clown%22%2C%22Expenses%22%3A50%2C%22Income%22%3A200%2C%22Assets%22%3A0%2C%22Debt%22%3A150%2C%22Age%22%3A50%2C%22Amount%22%3A2400%2C%22Price%22%3A3000%7D%5D%20

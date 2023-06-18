@@ -53,3 +53,20 @@ train |> select(Home) |> head(n=15) |> View()
 train |> 
     head(n=15) |> 
     model.matrix( ~ Home, data=_)
+
+
+library(recipes)
+
+recipe(Status ~ ., data=credit) |> 
+    themis::step_downsample(Status, under_ratio=1.2) |> 
+    # remove inputs with near zero variance
+    step_nzv(all_predictors()) |> 
+    step_filter_missing(all_predictors(), threshold=0.5) |> 
+    step_impute_knn(all_numeric_predictors()) |> 
+    step_unknown(
+        all_nominal_predictors(),
+        new_level='missing'
+    ) |> 
+    step_normalize(all_numeric_predictors()) |> 
+    # step_center() |> step_scale()
+    
